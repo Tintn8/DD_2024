@@ -1,0 +1,11 @@
+language: csharp
+solution: NameSorter.sln
+mono: none
+dotnet: 5.0
+
+before_script:
+  - dotnet restore
+
+script:
+  - dotnet build
+  - dotnet test name-sorter/name-sorter.csproj
