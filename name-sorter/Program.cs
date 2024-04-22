@@ -1,5 +1,6 @@
 ﻿namespace name_sorter
 {
+     //logic is broken into functions to provide better reusability for later implementations
     public class Program
     {
         // Start of program
@@ -75,6 +76,7 @@
                 .Select(nameParts => string.Join(' ', nameParts))
 
                 .ToList();
+            // Chose list instead of array due to familiarity. The list was chosen due to the unkown amount of items. 
         }
 
 
