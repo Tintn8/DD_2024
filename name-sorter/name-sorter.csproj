@@ -6,6 +6,11 @@
     <RootNamespace>name_sorter</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>dd.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="dd.ico" />
+  </ItemGroup>
 
 </Project>
