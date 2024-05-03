@@ -1,20 +1,15 @@
-version: "{build}"
+version: 1.0.{build}
+image: Visual Studio 2022
+ 
 
-image: Visual Studio 2022  # Adjust image based on your .NET version
+configuration: Release
 
 build_script:
-- ps: # Use PowerShell for these steps
-  - $solutionPath = "$(SolutionDir)\name-sorter.sln"
-  # Restore nuget packages for both projects
-  NuGet restore $solutionPath
-  # Build the test project first
-  msbuild $solutionPath /p:Configuration=Release /target:Rebuild /property:TestProject=Tests
-  # Build the main program project
-  msbuild $solutionPath /p:Configuration=Release
+  - ps: nuget restore
+  - msbuild name-sorter.sln /p:Configuration=Release
 
-after_build:
-- ps: # Run tests after build
-  $testResults = "$(BuildArtifactsDirectory)\**\*TestResults*.xml"
-  if ($testResults) {
-    Publish-TestResults -TestResultFiles $testResults -TestRunName "Name Sorter Tests"
-  }
+test_script:
+  - ps: |
+      $ErrorActionPreference = 'Stop'
+      $testResultsPath = Join-Path $env:APPVEYOR_BUILD_FOLDER 'TestResults'
+      dotnet test --logger "trx;LogFileName=test_results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$testResultsPath/coverage.cobertura.xml Tests.csproj
