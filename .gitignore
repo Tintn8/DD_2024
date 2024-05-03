@@ -361,3 +361,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.travis.yml
+/Application/name-sorter.deps.json
+/Application/name-sorter.dll
+/Application/name-sorter.exe
+/Application/name-sorter.pdb
+/Application/name-sorter.runtimeconfig.json
+/Application/nunit.framework.dll
+/Application/nunit.framework.legacy.dll
+/Application/unsorted-names-list.txt
+/README.md
