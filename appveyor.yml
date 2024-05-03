@@ -1,16 +1,7 @@
-version: 1.0.{build}
-image: Visual Studio 2022
-platform:
-  - x64
-
 configuration: Release
 
-build_script:
-  - ps: nuget restore
-  - msbuild name-sorter.sln /p:Configuration=Release
-
-test_script:
-  - ps: |
-      $ErrorActionPreference = 'Stop'
-      $testResultsPath = Join-Path $env:APPVEYOR_BUILD_FOLDER 'TestResults'
-      dotnet test --logger "trx;LogFileName=test_results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$testResultsPath/coverage.cobertura.xml name-sorter.csproj
+before_build:
+ - nuget restore
+ 
+ verbosity: minimal
+ publish_wap: true
